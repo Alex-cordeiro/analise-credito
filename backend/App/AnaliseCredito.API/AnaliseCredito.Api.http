@@ -1,0 +1,6 @@
+@AnaliseCredito.Api_HostAddress = http://localhost:5012
+
+GET {{AnaliseCredito.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

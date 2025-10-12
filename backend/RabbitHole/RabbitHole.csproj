@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+     <PackageId>RabbitHole</PackageId>
+     <Version>1.0.0</Version>
+     <Authors>Alexsander Cordeiro</Authors>
+     <Description>Biblioteca de abstração para comunicação com o RabbitMQ. RabbitHole, nome inspirado na historia de Alice no País Das Maravilhas, onde ela entra em um buraco de lebre "Rabbit Hole"</Description>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.9" />
+    <PackageReference Include="Polly" Version="8.6.4" />
+    <PackageReference Include="RabbitMQ.Client" Version="7.1.0" />
+  </ItemGroup>
+
+</Project>
