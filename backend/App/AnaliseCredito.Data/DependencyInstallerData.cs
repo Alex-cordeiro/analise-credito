@@ -1,7 +1,6 @@
 ﻿using AnaliseCredito.Data.Contexts;
 using AnaliseCredito.Data.Repositories;
 using AnaliseCredito.Data.UOW;
-using AnaliseCredito.Data.UOW.EF;
 using AnaliseCredito.Domain.Entities.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

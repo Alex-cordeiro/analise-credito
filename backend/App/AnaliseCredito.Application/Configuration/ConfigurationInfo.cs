@@ -1,4 +1,4 @@
-namespace AnaliseCredito.Api;
+namespace AnaliseCredito.Application.Configuration;
 
 public static class ConfigurationInfo
 {

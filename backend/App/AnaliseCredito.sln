@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnaliseCredito.Data", "Anal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnaliseCredito.Domain", "AnaliseCredito.Domain\AnaliseCredito.Domain.csproj", "{23FC9675-18C6-4F78-837D-0B047B534C96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnaliseCredito.Utils", "AnaliseCredito.Utils\AnaliseCredito.Utils.csproj", "{F3B2D988-DA06-403E-8DAA-8BDA8F5B2037}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{23FC9675-18C6-4F78-837D-0B047B534C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23FC9675-18C6-4F78-837D-0B047B534C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23FC9675-18C6-4F78-837D-0B047B534C96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3B2D988-DA06-403E-8DAA-8BDA8F5B2037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3B2D988-DA06-403E-8DAA-8BDA8F5B2037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3B2D988-DA06-403E-8DAA-8BDA8F5B2037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3B2D988-DA06-403E-8DAA-8BDA8F5B2037}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

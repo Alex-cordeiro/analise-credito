@@ -1,4 +1,8 @@
 using AnaliseCredito.Api;
+using AnaliseCredito.Application;
+using AnaliseCredito.Application.Configuration;
+using AnaliseCredito.Data;
+using AnaliseCredito.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,8 +24,22 @@ ConfigurationInfo.RabbitMqPassword = config.GetSection("RabbitMq:Password").Valu
 
 
 // Add services to the container.
+builder.Services.AddDataDependencies(ConfigurationInfo.ConnectionString);
+//Adiciona serviços do Dominio
+builder.Services.AddDomainServices();
+//Add Validators
+builder.Services.AddValidators();
+
+//Adiciona serviço RabbitMQ
+builder.Services.AddRabbitIntegration(
+    ConfigurationInfo.RabbitMqHost, 
+    ConfigurationInfo.RabbitMqPort,  
+ConfigurationInfo.RabbitMqUserName, 
+    ConfigurationInfo.RabbitMqPassword);
+
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

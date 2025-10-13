@@ -1,7 +1,7 @@
 using AnaliseCredito.Data.Contexts;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace AnaliseCredito.Data.UOW.EF;
+namespace AnaliseCredito.Data.UOW;
 
 public class UnitOfWork : IUnitOfWork
 {
