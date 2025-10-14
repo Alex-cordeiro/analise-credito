@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using AnaliseCredito.Data.Contexts;
 using AnaliseCredito.Domain.Entities.Base;
+using Microsoft.Extensions.Logging;
 
 namespace AnaliseCredito.Data.Repositories;
 
@@ -9,11 +10,13 @@ public class BaseRepository<T> : IBaseDomainRepository<T> where T : BaseEntity
 {
     private BaseContext _context;
     private DbSet<T> _dbSet;
+    private ILogger<BaseRepository<T>>  _logger;
 
-    public BaseRepository(BaseContext context)
+    public BaseRepository(BaseContext context, ILogger<BaseRepository<T>> logger)
     {
         _context = context;
         _dbSet = _context.Set<T>();
+        _logger = logger;
     }
 
     public async Task<bool> Add(T entity, bool saveChanges = true)
@@ -27,8 +30,9 @@ public class BaseRepository<T> : IBaseDomainRepository<T> where T : BaseEntity
 
             return true;
         }
-        catch
+        catch(Exception e)
         {
+            _logger.LogError(e.Message);
             return false;
         }
     }
@@ -85,8 +89,9 @@ public class BaseRepository<T> : IBaseDomainRepository<T> where T : BaseEntity
             
             return Task.FromResult(true);
         }
-        catch
+        catch(Exception e)
         {
+            _logger.LogError(e.Message);
             return Task.FromResult(false);
         }
     }

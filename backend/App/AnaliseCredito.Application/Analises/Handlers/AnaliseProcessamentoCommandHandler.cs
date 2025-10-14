@@ -62,6 +62,8 @@ public class AnaliseProcessamentoCommandHandler : IRequestHandler<AnaliseProcess
             
                 var cliente = new Cliente(request.NomeCliente, request.Email, request.Telefone, request.Cpf,
                     request.Renda);
+                
+                cliente.AddEndereco(request.Logradouro, request.Numero, request.Bairro, request.Cidade, request.Estado);
                 analise = new Analise();
                 analise.AddCliente(cliente);
                 
