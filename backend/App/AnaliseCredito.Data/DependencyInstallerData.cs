@@ -16,10 +16,10 @@ namespace AnaliseCredito.Data
             });
 
             //Generic
-            services.AddTransient(typeof(IBaseDomainRepository<>), typeof(BaseRepository<>));
+            services.AddScoped(typeof(IBaseDomainRepository<>), typeof(BaseRepository<>));
             
             //UnitOf Work
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             
             return services;
         }

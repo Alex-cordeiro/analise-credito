@@ -16,11 +16,25 @@ public class Analise : BaseEntity
     {
         Cliente = cliente;
     }
-    public Guid ClienteId { get; set; }
+
+    public void AddComentarioAnalise(string comentarioAnalise)
+    {
+        ComentarioAnalise = comentarioAnalise;
+    }
+
+    public void AddLimiteCredito(decimal limiteCredito)
+    {
+        LimiteCredito = limiteCredito;
+    }
+    public Guid ClienteId { get; private set; }
 
     public EAnaliseStatus Status { get; private set; }
 
+    public decimal LimiteCredito { get; set; }
+
     public DateTime CreatedAt { get; private set; }
 
-    public Cliente Cliente { get; set; } = default;
+    public string ComentarioAnalise { get; private set; }
+
+    public Cliente Cliente { get; private set; } = default;
 }

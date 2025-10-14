@@ -15,10 +15,11 @@ public class RabbitPublisher : IRabbitPublisher
     private readonly ILogger<RabbitPublisher> _logger;
 
 
-    public RabbitPublisher(IRabbitConnection connection, RabbitOptions options)
+    public RabbitPublisher(IRabbitConnection connection, RabbitOptions options, ILogger<RabbitPublisher> logger)
     {
         _connection = connection;
         _options = options;
+        _logger = logger;
     }
 
     public async Task PublishAsync(string queueName, object message)

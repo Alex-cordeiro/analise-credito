@@ -10,17 +10,17 @@
     <PackageReference Include="FluentValidation" Version="12.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
     <PackageReference Include="MediatR" Version="13.0.0" />
-    <PackageReference Include="RabbitHole" Version="1.0.0" />
+    <PackageReference Include="RabbitHole" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AnaliseCredito.Data\AnaliseCredito.Data.csproj" />
     <ProjectReference Include="..\AnaliseCredito.Domain\AnaliseCredito.Domain.csproj" />
     <ProjectReference Include="..\AnaliseCredito.Utils\AnaliseCredito.Utils.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Analises\Queries\" />
-    <Folder Include="Commands\" />
   </ItemGroup>
 
 </Project>

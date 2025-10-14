@@ -15,10 +15,11 @@ public class RabbitConsumer : IRabbitConsumer
 
     private readonly ILogger<RabbitConsumer> _logger;
 
-    public RabbitConsumer(IRabbitConnection connection, RabbitOptions options)
+    public RabbitConsumer(IRabbitConnection connection, RabbitOptions options, ILogger<RabbitConsumer> logger)
     {
         _connection = connection;
         _options = options;
+        _logger = logger;
     }
 
     public async Task StartConsumingAsync(string queueName, Func<string, Task> onMessageReceived, CancellationToken token = default)

@@ -3,6 +3,7 @@ using AnaliseCredito.Application;
 using AnaliseCredito.Application.Configuration;
 using AnaliseCredito.Data;
 using AnaliseCredito.Domain;
+using AnaliseCredito.Worker;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,26 +18,41 @@ builder.Services.AddLogging(config =>
 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 IConfiguration config = (IConfiguration)builder.Configuration.AddJsonFile($"appsettings.{env}.json");
 ConfigurationInfo.ConnectionString = config.GetConnectionString("Default") ?? string.Empty;
-ConfigurationInfo.RabbitMqHost = config.GetSection("RabbitMq:Host").Value ?? string.Empty;
-ConfigurationInfo.RabbitMqPort = Convert.ToInt32(config.GetSection("RabbitMq:Port").Value);
-ConfigurationInfo.RabbitMqUserName = config.GetSection("RabbitMq:UserName").Value ?? string.Empty;
-ConfigurationInfo.RabbitMqPassword = config.GetSection("RabbitMq:Password").Value ??  string.Empty;
+ConfigurationInfo.RabbitMqHost = config.GetSection("RabbiMQ:Host").Value ?? string.Empty;
+ConfigurationInfo.RabbitMqPort = Convert.ToInt32(config.GetSection("RabbiMQ:Port").Value);
+ConfigurationInfo.RabbitMqUserName = config.GetSection("RabbiMQ:UserName").Value ?? string.Empty;
+ConfigurationInfo.RabbitMqPassword = config.GetSection("RabbiMQ:Password").Value ??  string.Empty;
 
 
 // Add services to the container.
 builder.Services.AddDataDependencies(ConfigurationInfo.ConnectionString);
+
 //Adiciona serviços do Dominio
 builder.Services.AddDomainServices();
+
+//Add AppServices
+builder.Services.AddAppServices();
+
 //Add Validators
 builder.Services.AddValidators();
 
-//Adiciona serviço RabbitMQ
+
+//Adiciona serviço RabbitMQ para publisher
 builder.Services.AddRabbitIntegration(
     ConfigurationInfo.RabbitMqHost, 
     ConfigurationInfo.RabbitMqPort,  
 ConfigurationInfo.RabbitMqUserName, 
     ConfigurationInfo.RabbitMqPassword);
 
+//Adiciona background services
+builder.Services.AddRabbitWorker(ConfigurationInfo.RabbitMqHost,
+    ConfigurationInfo.RabbitMqPort,
+    ConfigurationInfo.RabbitMqUserName,
+    ConfigurationInfo.RabbitMqPassword);
+builder.Services.AddHostedServices();
+
+//Add MediatR
+builder.Services.AddMediatRDependence();
 
 builder.Services.AddControllers();
 

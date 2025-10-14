@@ -11,14 +11,14 @@ namespace AnaliseCredito.Domain.Entities.Base
             _repository = baseRepository;
         }
 
-        public async Task<bool> Create(T entity)
+        public async Task<bool> Create(T entity, bool saveChanges = true)
         {
-            return await _repository.Add(entity);
+            return await _repository.Add(entity, saveChanges);
         }
 
-        public async Task<bool> Delete(T entity)
+        public async Task<bool> Delete(T entity,  bool saveChanges = true)
         {
-            return await _repository.Delete(entity);
+            return await _repository.Delete(entity, saveChanges);
         }
 
         public IEnumerable<T?> GetAllAsync(bool isReadOnly = true, Expression<Func<T, bool>>? expression = null,
@@ -32,9 +32,9 @@ namespace AnaliseCredito.Domain.Entities.Base
             return await _repository.GetById(id);
         }
 
-        public async Task<bool> Update(T entity)
+        public async Task<bool> Update(T entity, bool saveChanges = true)
         {
-            return await _repository.Update(entity);
+            return await _repository.Update(entity, saveChanges);
         }
     }
 }

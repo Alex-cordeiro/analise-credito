@@ -6,21 +6,23 @@ namespace AnaliseCredito.Domain.Entities.Clientes;
 public class Cliente : BaseEntity
 {
 
-    public Cliente(string nomeCliente, string email, string telefone, string cpf)
+    public Cliente(string nomeCliente, string email, string telefone, string cpf, decimal renda)
     {
         NomeCliente = nomeCliente;
         Email = email;
         Telefone = telefone;
         Cpf = cpf;
+        Renda = renda;
     }
 
-    public void AddEndereco(string logradouro, int numero, string bairro, string cidade, string estado)
+    public void AddEndereco(string logradouro, int numero, string bairro, string cidade, string estado, decimal renda)
     {
         Logradouro = logradouro;
         Numero = numero;
         Bairro = bairro;
         Cidade = cidade;
         Estado = estado;
+        Renda = renda;
     }
     
     public string NomeCliente { get; private set; } = null!;
@@ -32,6 +34,6 @@ public class Cliente : BaseEntity
     public string Email { get; private set; } = null!;
     public string Telefone { get; private set; } = null!;
     public string Cpf { get; private set; } = null!;
-    
+    public decimal Renda { get; private set; }
     public IList<Analise> Analises { get; set; } = new List<Analise>();
 }

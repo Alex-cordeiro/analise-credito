@@ -1,3 +1,6 @@
+using System.Reflection;
+using AnaliseCredito.Application.AppServices;
+using AnaliseCredito.Application.Interfaces;
 using AnaliseCredito.Application.Validators;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +27,20 @@ public static class DependencyInstallerApplication
     public static IServiceCollection AddValidators(this IServiceCollection services)
     {
         services.AddValidatorsFromAssemblyContaining<AnaliseCreateCommandValidator>();
+        return services;
+    }
+
+    public static IServiceCollection AddMediatRDependence(this IServiceCollection services)
+    {
+        var assembly = Assembly.GetExecutingAssembly();
+        services.AddMediatR(ctg => ctg.RegisterServicesFromAssembly(assembly));
+        return services;
+    }
+
+    public static IServiceCollection AddAppServices(this IServiceCollection services)
+    {
+        services.AddScoped<IAnaliseAppService, AnaliseAppService>();
+        services.AddScoped<IValidadorPropostaAppService, ValidadorPropostaAppService>();
         return services;
     }
 }

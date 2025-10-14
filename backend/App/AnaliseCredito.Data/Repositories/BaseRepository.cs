@@ -16,11 +16,14 @@ public class BaseRepository<T> : IBaseDomainRepository<T> where T : BaseEntity
         _dbSet = _context.Set<T>();
     }
 
-    public async Task<bool> Add(T entity)
+    public async Task<bool> Add(T entity, bool saveChanges = true)
     {
         try
         {
             await _dbSet.AddAsync(entity);
+            
+            if (saveChanges)
+                await _context.SaveChangesAsync();
 
             return true;
         }
@@ -49,11 +52,15 @@ public class BaseRepository<T> : IBaseDomainRepository<T> where T : BaseEntity
         return query.AsQueryable();
     }
 
-    public Task<bool> Delete(T entity)
+    public Task<bool> Delete(T entity, bool saveChanges = true)
     {
         try
         {
             _dbSet.Remove(entity);
+
+            if (saveChanges)
+                _context.SaveChanges();
+            
             return Task.FromResult(true);
         }
         catch
@@ -67,11 +74,15 @@ public class BaseRepository<T> : IBaseDomainRepository<T> where T : BaseEntity
         return _dbSet.FirstOrDefaultAsync<T>(x => x.Id.Equals(id));
     }
 
-    public Task<bool> Update(T entity)
+    public Task<bool> Update(T entity, bool  saveChanges = true)
     {
         try
         {
             _dbSet.Update(entity);
+            
+            if (saveChanges)
+                _context.SaveChanges();
+            
             return Task.FromResult(true);
         }
         catch

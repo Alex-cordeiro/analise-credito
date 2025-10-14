@@ -2,26 +2,22 @@ using System.Text.Json;
 using AnaliseCredito.Application.Analises.Commands;
 using AnaliseCredito.Application.Response;
 using AnaliseCredito.Application.Validators;
-using MediatR;
 using AnaliseCredito.Domain.Entities.Analises;
 using AnaliseCredito.Domain.Entities.Analises.Interfaces;
-using AnaliseCredito.Domain.Entities.Clientes;
 using AnaliseCredito.Domain.Entities.Clientes.Interfaces;
 using FluentValidation.Results;
+using MediatR;
 using RabbitHole.Interfaces;
 
 namespace AnaliseCredito.Application.Analises.Handlers;
 
 public class AnaliseCreateCommandHandler : IRequestHandler<AnaliseCreateCommand, ResponseResult<Analise>>
 {
-    private readonly IAnaliseService _analiseService;
-    private readonly IClienteService  _clienteService;
-    
+
     private readonly IRabbitPublisher _rabbitPublisher;
-    public AnaliseCreateCommandHandler(IAnaliseService analiseService, IClienteService clienteService, IRabbitPublisher rabbitPublisher)
+    public AnaliseCreateCommandHandler(IRabbitPublisher rabbitPublisher)
     {
-        _analiseService = analiseService;
-        _clienteService = clienteService;
+        _rabbitPublisher = rabbitPublisher;
     }
     public async Task<ResponseResult<Analise>> Handle(AnaliseCreateCommand request, CancellationToken cancellationToken)
     {
@@ -35,12 +31,17 @@ public class AnaliseCreateCommandHandler : IRequestHandler<AnaliseCreateCommand,
             return ResponseResult.RequestError<Analise>("Ocorreram erros", errorList);
         }
         
-        var cliente = new Cliente(request.NomeCliente, request.Email, request.Telefone,  request.Cpf);
+
+        var serializerOptions = new JsonSerializerOptions
+        {
+            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = false
+        };
+
+        var textCommand = JsonSerializer.Serialize(request, serializerOptions);
         
-        var analise = new Analise();
-        analise.AddCliente(cliente);
-        
-        await _rabbitPublisher.PublishAsync("analise", JsonSerializer.Serialize(analise));
+        await _rabbitPublisher.PublishAsync("analise", request);
 
         return ResponseResult.Ok<Analise>("Analise criada");
     }

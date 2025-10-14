@@ -16,6 +16,7 @@ public static class ServiceCollectionExtension
         services.AddSingleton(options);
         services.AddSingleton<IRabbitConnection, RabbitConnection>();
         services.AddSingleton<IRabbitPublisher, RabbitPublisher>();
+        services.AddSingleton<IRabbitConsumer, RabbitConsumer>();
 
         return services;
     }

@@ -3,10 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-     <PackageId>RabbitHole</PackageId>
-     <Version>1.0.0</Version>
-     <Authors>Alexsander Cordeiro</Authors>
-     <Description>Biblioteca de abstração para comunicação com o RabbitMQ. RabbitHole, nome inspirado na historia de Alice no País Das Maravilhas, onde ela entra em um buraco de lebre "Rabbit Hole"</Description>
+    <PackageId>RabbitHole</PackageId>
+    <Version>1.1.0</Version>
+    <Authors>Alexsander Cordeiro</Authors>
+    <Description>Biblioteca de abstração para comunicação com o RabbitMQ. RabbitHole, nome inspirado
+      na historia de Alice no País Das Maravilhas, onde ela entra em um buraco de lebre</Description>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>

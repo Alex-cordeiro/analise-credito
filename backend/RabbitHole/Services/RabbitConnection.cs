@@ -15,10 +15,10 @@ public class RabbitConnection : IRabbitConnection, IAsyncDisposable
     private readonly SemaphoreSlim _lock = new(1, 1);
     private readonly ILogger<RabbitConnection> _logger;
 
-    public RabbitConnection(RabbitOptions options)
+    public RabbitConnection(RabbitOptions options, ILogger<RabbitConnection> logger)
     {
         _options = options ?? throw new ArgumentNullException(nameof(options));
-
+        _logger = logger ?? throw new ArgumentNullException();
         ValidateOptions();
     }
 
@@ -75,6 +75,7 @@ public class RabbitConnection : IRabbitConnection, IAsyncDisposable
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Ocorreu um erro ao retornar a conexão");
             throw;
         }
         finally
