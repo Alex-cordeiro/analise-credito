@@ -6,7 +6,6 @@ export interface IStore {
 }
 
 export interface IActions {
-
   criarAnalise: (user: ICriaAnalise) => void;
   retornaStatusAnalise: (cpf: string) => void;
 }
@@ -30,6 +29,7 @@ export interface ICriaAnalise {
   cidade: string;
   estado: string;
   numero: number;
+  cep: string;
 }
 
 export interface ILoading {
@@ -47,5 +47,6 @@ export interface IPesquisaAnaliseResponseContent {
   limiteLiberado: number;
 }
 
-export type ICriaAnaliseResponse = ICommonResponse<string[]>
-export type IPesquisaAnaliseResponse = ICommonResponse<IPesquisaAnaliseResponseContent>
+export type ICriaAnaliseResponse = ICommonResponse<string[]>;
+export type IPesquisaAnaliseResponse =
+  ICommonResponse<IPesquisaAnaliseResponseContent>;
