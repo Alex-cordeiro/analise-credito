@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 
-namespace CARGA.Utils.Helpers
+namespace AnaliseCredito.Utils.Helpers
 {
     public static class EnumHelper
     {

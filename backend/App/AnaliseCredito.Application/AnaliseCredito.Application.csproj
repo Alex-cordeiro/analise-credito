@@ -19,8 +19,4 @@
     <ProjectReference Include="..\AnaliseCredito.Utils\AnaliseCredito.Utils.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Analises\Queries\" />
-  </ItemGroup>
-
 </Project>

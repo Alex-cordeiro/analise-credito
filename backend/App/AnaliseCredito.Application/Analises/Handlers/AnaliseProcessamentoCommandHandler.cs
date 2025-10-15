@@ -5,6 +5,7 @@ using AnaliseCredito.Data.UOW;
 using AnaliseCredito.Domain.Entities.Analises;
 using AnaliseCredito.Domain.Entities.Analises.Interfaces;
 using AnaliseCredito.Domain.Entities.Clientes;
+using AnaliseCredito.Domain.Enums;
 using AnaliseCredito.Utils.Helpers;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -72,16 +73,19 @@ public class AnaliseProcessamentoCommandHandler : IRequestHandler<AnaliseProcess
                     case (> 700):
                         analise.AddComentarioAnalise("Score alto - será adicionado um limite premium");
                         analise.AddLimiteCredito(800.00m);
+                        analise.AtualizaStatus(EAnaliseStatus.Aprovado);
                         _logger.LogInformation("Limite premium concedido para score: {Score}", resultScore);
                         break;
                     case (>= 501):
                         analise.AddComentarioAnalise("Score mínimo requerido - será adicionado um limite base");
                         analise.AddLimiteCredito(300.00m);
+                        analise.AtualizaStatus(EAnaliseStatus.Aprovado);
                         _logger.LogInformation("Limite base concedido para score: {Score}", resultScore);
                         break;
                     default:
                         analise.AddComentarioAnalise("Score muito abaixo - análise necessária");
                         analise.AddLimiteCredito(0m);
+                        analise.AtualizaStatus(EAnaliseStatus.Recusado);
                         _logger.LogWarning("Score abaixo do mínimo: {Score}. Limite negado.", resultScore);
                         break;
                 }

@@ -39,12 +39,11 @@ public class ResponseResult
             Errors = errors
         };
     }
-    public static ResponseResult Fail(string message) => new ResponseResult { Success = false, Message = message };
-    public static ResponseResult<T> Fail<T>(string message, List<string> errors) => new ResponseResult<T> { Success = false, Message = message, Errors = errors };
-    public static ResponseResult<T> Fail<T>(string message) => new ResponseResult<T> { Success = false, Message = message};
-    public static ResponseResult Ok(string message) => new ResponseResult { Success = true, Message = message };
-    public static ResponseResult<T> Ok<T>(T data) => new ResponseResult<T> { Success = true, Data = data };
+    public ResponseResult Fail(string message) => new ResponseResult { Success = false, Message = message };
+    public ResponseResult<T> Fail<T>(string message, List<string> errors) => new ResponseResult<T> { Success = false, Message = message, Errors = errors };
+    public ResponseResult<T> Fail<T>(string message) => new ResponseResult<T> { Success = false, Message = message};
     public static ResponseResult<T> Ok<T>(string message) => new ResponseResult<T> { Success = true, Message = message};
+    public ResponseResult<T> Ok<T>(string message, T data) => new ResponseResult<T> { Success = true, Message = message, Data = data};
 }
 
 public class ResponseResult<T> : ResponseResult

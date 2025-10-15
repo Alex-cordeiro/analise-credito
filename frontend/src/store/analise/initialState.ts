@@ -1,6 +1,5 @@
 import type { IState } from "./interface";
 
-
 export const initialState: IState = {
   analise: {
     bairro: "",
@@ -13,6 +12,7 @@ export const initialState: IState = {
     numero: 0,
     renda: 0,
     telefone: "",
+    cep: "",
   },
   loadings: {
     create: false,

@@ -23,5 +23,18 @@ namespace AnaliseCredito.Data
             
             return services;
         }
+        public static IServiceCollection MigrateData(this IServiceCollection services)
+        {
+            var serviceProvider = services.BuildServiceProvider();
+            using (var scope = serviceProvider.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider
+                    .GetRequiredService<BaseContext>();
+
+                dbContext.Database.Migrate();
+            }
+
+            return services;
+        }
     }
 }

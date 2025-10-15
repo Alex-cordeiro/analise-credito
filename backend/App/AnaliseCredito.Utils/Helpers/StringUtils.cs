@@ -9,4 +9,6 @@ public static class StringUtils
             
         return $"{cpf.Substring(0, 3)}.***.***-{cpf.Substring(9, 2)}";
     }
+    
+    
 }

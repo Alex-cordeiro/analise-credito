@@ -26,6 +26,7 @@ ConfigurationInfo.RabbitMqPassword = config.GetSection("RabbiMQ:Password").Value
 
 // Add services to the container.
 builder.Services.AddDataDependencies(ConfigurationInfo.ConnectionString);
+builder.Services.MigrateData();
 
 //Adiciona serviços do Dominio
 builder.Services.AddDomainServices();
@@ -60,6 +61,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+if (env == "Development")
+{
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowAny", policy =>
+        {
+            policy.AllowAnyOrigin();
+            policy.WithOrigins("http://localhost")
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+    });
+}
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -67,6 +83,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors("AllowAny");
 }
 
 app.UseHttpsRedirection();

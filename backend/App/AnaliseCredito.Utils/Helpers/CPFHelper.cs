@@ -73,4 +73,9 @@ public static class CPFHelper
 
         return (true, "CPF válido");
     }
+
+    public static string RemovePontuacao(string cpf)
+    {
+        return cpf.Replace(".", "").Replace("-", "");
+    }
 }

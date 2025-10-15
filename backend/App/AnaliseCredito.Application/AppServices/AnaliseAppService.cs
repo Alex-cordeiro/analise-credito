@@ -1,6 +1,8 @@
 using AnaliseCredito.Application.Analises.Commands;
+using AnaliseCredito.Application.Analises.Queries;
 using AnaliseCredito.Application.Interfaces;
 using AnaliseCredito.Application.Response;
+using AnaliseCredito.Application.ViewModels;
 using AnaliseCredito.Data.UOW;
 using AnaliseCredito.Domain.Entities.Analises;
 using MediatR;
@@ -15,14 +17,7 @@ public class AnaliseAppService : BaseAppService, IAnaliseAppService
         _mediator = mediator;
     }
 
-    public async Task<ResponseResult<Analise>> CriateAnalise(AnaliseCreateCommand command)
-    {
-        var result = await _mediator.Send(command);
-    
-        // Debug info
-        Console.WriteLine($"Tipo do result: {result?.GetType()}");
-        Console.WriteLine($"Tipo genérico esperado: {typeof(ResponseResult<Analise>)}");
-        Console.WriteLine($"São do mesmo tipo? {result?.GetType() == typeof(ResponseResult<Analise>)}");
-        return (ResponseResult<Analise>)result;
-    }
+    public async Task<ResponseResult<Analise>> CriateAnalise(AnaliseCreateCommand command) => await _mediator.Send(command);
+
+    public Task<ResponseResult<AnaliseViewModel>> ConsultaAnalise(AnalisePesquisaQuery query) => _mediator.Send(query);
 }

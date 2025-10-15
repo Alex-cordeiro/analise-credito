@@ -7,7 +7,8 @@ export interface IStore {
 
 export interface IActions {
   criarAnalise: (user: ICriaAnalise) => void;
-  retornaStatusAnalise: (cpf: string) => void;
+  retornaStatusAnalise: (cpf: IPesquisaAnalise) => void;
+  resetResponse: () => void;
 }
 
 export interface IState {
@@ -45,6 +46,7 @@ export interface IPesquisaAnalise {
 export interface IPesquisaAnaliseResponseContent {
   analiseStatusDescricao: string;
   limiteLiberado: number;
+  status: number;
 }
 
 export type ICriaAnaliseResponse = ICommonResponse<string[]>;

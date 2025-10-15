@@ -17,6 +17,11 @@ public class Analise : BaseEntity
         Cliente = cliente;
     }
 
+    public void AtualizaStatus(EAnaliseStatus status)
+    {
+        Status = status;
+    }
+
     public void AddComentarioAnalise(string comentarioAnalise)
     {
         ComentarioAnalise = comentarioAnalise;
